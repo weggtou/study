@@ -1,0 +1,133 @@
+1.c语言中运算中的变量是什么类型结果就是什么类型
+例如
+int i=1
+1/i就是整形
+
+2.在遍历矩阵时可以用
+int l[m][n];
+for (auto &line: l){
+    for (auto &a:line)
+}
+及先将第一行绑定到line，此时line为每一行组成的数组
+因为 x = l[1]时x为l第一行组成的数组，虽然无法直接输出，但可以遍历
+在嵌套的循环中用a绑定line中的各各元素
+
+3.四舍五入用round
+
+4.for (auto &g :v1){
+        cin >> g;
+    }
+    可以写成一行
+for (auto &g:v1) cin >> g;
+
+5.vector反转(include algorithm)
+reverse(a.begin(),a.end()) 按位置
+reverse(a,a+n) 按元素
+
+6.如果是一个每次移动k的循环
+不要for (int i = 0; a0+i*k <m ; i++)
+直接for(int i = a0 ; i<m ; i+= k)
+更简单
+
+7.两个东西挨个交换可以将他们放到一个可变数组里
+令index = 0;
+每次使用后
+index = 1-index;
+这样每次使用a[index]
+就会交换
+
+8.判断最小值有专业的方法
+bool found = false;用一个值来存储是否找到
+int min_index = 0;用一个值来存储是否最小
+for (遍历){
+    if (a[i] < a[min_index] || !found){
+        min_index = i
+    }
+}
+
+9.希望数组的id和相同时可以在0号位置加一个用不到的数
+
+10.在记录类似于开关灯或有没有被访问到的问题时可以新建一个数组来记录
+
+11.对于可变数组和可变字串，没有设置初始值时是0，但是数组和字串是随机的
+所以在定义数组或字串时要记得初始化
+
+12.在reverse char类型时只能是元素型的反
+
+13.字符串比较不支持直接用运算符
+要用strcmp
+
+14.在回行循环时例如凯撒加密一位
+要让abc变为bcd统一向后移一位
+但是在循环时到最后一位会出问题
+所以
+可以将索引变为(i+1)%len()
+这样最后一个对应的正好是0依次类推
+
+15.strcmp()第一个值输入的是起始位置
+
+16.vector的种类可以是string
+
+17.string 越界一定等于0
+
+18.string 在用substr截时，如果索引范围大于长度，也不会有问题，
+例如总共只有三个字符但是substr要截10个最后也会输出三个字符，不会有影响
+
+19.在使用getline之前如果有正常输入及cin，则getline在第一次会读取上一次残留的回车
+所以如果需要，则要提前进行一次getline把回车读取掉
+
+20.#include <algorithm>reverse要申明
+
+21.在输入的数量不确定时可以用
+while(cin>>a)来输入
+
+22.max能直接用了，不用那么麻烦
+
+23.固定小数的输出位数
+cout << fixed;
+cout.precision(10);
+
+24.多维数组统计p1464
+#include <iostream>
+#include <format>
+using namespace std;
+
+long long memo[21][21][21] = {0};
+
+long long w(long long a, long long b, long long c) {
+    if (a <= 0 || b <= 0 || c <= 0) return 1;
+    if (a > 20 || b > 20 || c > 20) return w(20, 20, 20);
+    if (memo[a][b][c] != 0) return memo[a][b][c];
+    long long res;
+    if (a < b && b < c) {
+        res = w(a, b, c - 1) + w(a, b - 1, c - 1) - w(a, b - 1, c);
+    } else {
+        res = w(a - 1, b, c) + w(a - 1, b - 1, c) + w(a - 1, b, c - 1) - w(a - 1, b - 1, c - 1);
+    }
+    memo[a][b][c] = res;
+    return res;
+}
+
+int main() {
+    long long a, b, c;
+    while (true) {
+        cin >> a >> b >> c;
+        if (a == -1 && b == -1 && c == -1) break;
+        cout << format("w({}, {}, {}) = {}", a, b, c, w(a, b, c)) << endl;
+    }
+}
+
+25.string 可以规定长度string(n,' ')规定为n个空格
+
+26.#include <algorithm>
+string 可以用count(a.begin(),a.end(),'a')来计数字符a在字符串a中的个数
+
+27.在判断是否在括号内时，可以设定一个计数cont = 0，挨个遍历字符串
+当a[i]=='('时加1，当a[i]==')'时减1，这时当cont=0时则在括号外面
+
+28.遍历值是可以在循环中改变的
+
+29.数组的size()函数是无符号longlong，在做减法时如果成为-1会转化为最大的无符号整数
+所以在.size()做减法时，应该先转化为int
+
+30.scanf 比cin快
