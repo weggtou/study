@@ -63,6 +63,7 @@ int* p2=new int[5]()
 
 delete 指针名 释放
 如果申请的是多个则要在delete后面加括号
+delete[] 指针名
 
 3.自动生命周期：
 栈区
@@ -84,14 +85,15 @@ delete 指针名 释放
 不仅是指针本身，只要是指向这个地址的指针都会成为悬挂指针
 
 五.智能指针
-<memory>
+include <memory>
 
-shared_ptr<指针类型> = maker_shared<类型>(大小);
+shared_ptr<指针类型> 变量名= maker_shared<类型>(大小);
+可以向堆申请内存
 这种类型的指针在指针被销毁时指向的内存会自动销毁
 不会内存泄漏
 如果复制了多份，则内存会存在到最后一个指针被销毁时销毁
 
-unique_ptr<指针类型> = maker_shared<类型>(大小)；
+unique_ptr<指针类型> 变量名= maker_shared<类型>(大小)；
 不能被复制，指针销毁时内存自动释放
 
 weak_ptr
