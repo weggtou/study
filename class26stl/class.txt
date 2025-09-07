@@ -54,6 +54,7 @@ vector的方法
 4.用new开连续内存是最快的但是不方便操作
 
 queue stack deque
+include <queue>
 他们都是类似于vector的数据类型
 1.queue
 支持push，pop，empty，size，front
@@ -72,3 +73,31 @@ int x = a.front()
 3.deque
 支持push_back,pop_back,push_front,pop_front，也支持下标访问
 但是下标访问性能远低于vector
+
+4.模板
+所有类型后面跟着的<>都是模板，它可以定义类型的状态，不只有一个参数
+
+5.greater <int>
+greater <int> 是一个类，但是它默认重载了()，所以是一个仿函数
+
+6.priority_queue<>
+优先队列
+(1)优先队列只能用top来获取第一个值
+(2)priority_queue会将存入的可比较数据自动按从大到小排列
+(3)push默认从后加入，pop默认从前删除
+(4)我们称这种从头部输出特征值的元素组合称为堆，从大到小排列叫大顶堆
+从小到大排列叫小顶堆
+(5)将大顶堆变成小顶堆的方法:更改模板
+priority_queue <存放类型，基于什么类型，比较器(函数的类型)>
+以int为例
+priority_queue<int,vector<int>,greater<int>>
+由于greater<int>是类型，且是拟函数，所以可以作为比较器
+函数指针，函数名，匿函数都无法作为比较器
+如果要用lambda，需要用decltype获取匿名函数类型
+应为他会在优先队列调用时用给的比较器创建一个无参数的对象用来传递值，而函数名不是类型，不能用来构建对象
+
+虽然函数指针在不解应用的情况下可以当函数指针类型无参数时为空指针，必须指向函数时才能使用
+
+为什么decltype匿名函数可以用呢：因为匿名函数的类型是匿名函数类，可以用来构建对象，并且重载了()，可以当函数调用
+但是decltype函数得到的是函数的类型，不能用来构建对象，更不用说传递参数了。
+
