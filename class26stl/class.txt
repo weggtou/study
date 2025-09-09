@@ -101,3 +101,72 @@ priority_queue<int,vector<int>,greater<int>>
 为什么decltype匿名函数可以用呢：因为匿名函数的类型是匿名函数类，可以用来构建对象，并且重载了()，可以当函数调用
 但是decltype函数得到的是函数的类型，不能用来构建对象，更不用说传递参数了。
 
+set multiset unordered_set
+都不支持下标访问
+1.set 有序 唯一
+默认从小到大排序，并且唯一
+insert,find,erase,count复杂度logn
+(1)可以使用find，返回迭代器，如果没有返回.end
+(2)可以使用insert，erase，count，如果insert不写位置，默认为最后
+(3)也可以使用lower_bound
+
+2.multiset 有序，不唯一
+find复杂度为n，其他都为logn
+(1)可以insert,erase，count，find
+(2)erase有特殊性，如果直接erase(1)会将所有1删掉,并返回删除的
+元素个数
+(3)为了只删除一个元素，需要删除指定元素的迭代器。erase(a.find(1))
+这时erase返回的是被删除元素的下一个迭代器
+(4)如果find的元素不存在会返回end，而erase(end)会报错，所以在删除
+时一定要先判断元素存不存在
+(5)但如果是确定元素的删除,erase(1)如果这个元素不存在就不会出现问题
+(6)额外函数，lower_bound(n)，返回第一个大于等于n的元素的位置，如果
+没有则返回end
+(7)只有支持比较大小的类型才可以使用，或者在模板中的第二个位置写比较函
+数的类型
+
+3.unordered_set 无序 唯一
+inset,erase,find,count复杂度都为1*c
+(1)元素要支持可哈希，或者在模板中的第二个参数自定义哈希值的计算方法，
+哈希值为无符号整数，所以自定义函数返回的值要为size_t类型
+(2)unordered_set判断两个数是否相同看他们哈希值是否相同，再看他们的实际值
+是否相同，分别对应模板中的第二和第三个参数
+unordered_set <pair<int,int>,decltype([](int x){
+    return (size_t)x.first;
+}),decltype([](int a,int b){
+    return a.first==b.first;
+})>
+示例中第二个参数定义了pair的哈希值为第一个int的值，第三个参数定义了
+两个pair相等的条件是first相同，所以当输入的值第一个int相同时unordered
+就会认为他们相同
+那么如何使用呢，对于有些小数的相加可能会有些误差，所以可以自定义他们相同
+的判断方法来将误差忽略
+unordered_set <double,decltype([](double a){
+    return (size_t) a*1e6;
+}),decltype([]{
+    return abs(a-b)< 1e-6;
+})>
+这样当两个小数误差在小数点后六位之后，即可相等
+
+4.性能（set普遍优于multiset）
+inset vector最快，其次unordered_set，最后set
+find unordered_set要快于set快于vector
+
+
+map(就是字典)
+map相当于将set作为标签后面跟了一个元素
+1.map
+insert,erase,find,[]
+(1)map<string,int> 对应set <string>
+但是按顺序排列的只有第一个值，第二个值没有要求，与第一个值绑定
+可以通过第一个值访问第二个值
+(2)insert时要按pair来添加元素
+
+2.multiset,unordered_map同理
+(1)在访问没有的键时，会创建一个键，在给这个键赋值为第二个值的默认构造
+例如没有unknown
+但是访问了
+cout << a[unknown]
+会输出0
+因为新建了一个键并赋值为int的默认构造
+如果此时cout << a.size()会比之前大一个，因为自动新建了
