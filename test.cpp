@@ -1,10 +1,11 @@
 #include <iostream>
 #include <vector>
 #include <bits/stdc++.h>
+#include <string>
 using namespace std;
 
 int main(){
-    set <int> a{1,2,3,4,5};
-    a.insert(10);
-    cout << *a.lower_bound(10);
+    string a = "a\0a";
+    cout << a;
+
 }

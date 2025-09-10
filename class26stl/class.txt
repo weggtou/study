@@ -7,7 +7,7 @@ sort
 5.如果不想写begin()和end(),可以在sort前加上ranges::，这样括号内的begin和end可以直接简写成数组名，
 之后的所用stl都是同理
 
-nth_element(begint,nth_place,end)
+nth_element(begin,nth_place,end)
 1.作用是将第n小的数放到第n位，比先用sort排序在找第n个位置的数要快
 2.第二个参数是a.begin()+n,要第几小的数n就是几
 3.输出时第n小的数排在第n位置，所以要写a[n]
@@ -68,10 +68,14 @@ int x = a.front()
 (vector也有)
 
 2.stack
-插入和删除都是在尾部，不支持下标，性能与vector类似
+(1)插入和删除都是在尾部，不支持下标，性能与vector类似
+stack 为栈，插入和删除都在栈顶，但是栈顶的定义是不同的
+尾部也可以叫栈顶，top可以返回栈顶的元素
+
+(2)不支持size，back
 
 3.deque
-支持push_back,pop_back,push_front,pop_front，也支持下标访问
+支持push_back,pop_back,push_front,pop_front，back也支持下标访问
 但是下标访问性能远低于vector
 
 4.模板
