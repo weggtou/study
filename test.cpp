@@ -5,7 +5,7 @@
 using namespace std;
 
 int main(){
-    string a = "a\0a";
-    cout << a;
+    string a = "{}";
+    cout << a.find('{');    
 
 }

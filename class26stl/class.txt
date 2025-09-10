@@ -165,6 +165,7 @@ insert,erase,find,[]
 但是按顺序排列的只有第一个值，第二个值没有要求，与第一个值绑定
 可以通过第一个值访问第二个值
 (2)insert时要按pair来添加元素
+insert(make_pair(s,i)),或者用.emplace()
 
 2.multiset,unordered_map同理
 (1)在访问没有的键时，会创建一个键，在给这个键赋值为第二个值的默认构造
