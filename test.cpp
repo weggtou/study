@@ -5,7 +5,8 @@
 using namespace std;
 
 int main(){
-    string a = "{}";
-    cout << a.find('{');    
-
+    map<int,int> x;
+    x.emplace(1,1);
+    x.emplace(2,2);
+    auto &[a,b] = *x.find(2);
 }

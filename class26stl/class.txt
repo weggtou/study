@@ -63,7 +63,7 @@ pop默认在最前删除
 具有比vector快的插入和删除速度，但是不支持下标访问
 开queue的方法
 queue<int> a
-front
+front()
 int x = a.front()
 (vector也有)
 
@@ -86,7 +86,7 @@ greater <int> 是一个类，但是它默认重载了()，所以是一个仿函�
 
 6.priority_queue<>
 优先队列
-(1)优先队列只能用top来获取第一个值
+(1)优先队列只能用top()来获取第一个值
 (2)priority_queue会将存入的可比较数据自动按从大到小排列
 (3)push默认从后加入，pop默认从前删除
 (4)我们称这种从头部输出特征值的元素组合称为堆，从大到小排列叫大顶堆

@@ -145,3 +145,14 @@ string 可以用count(a.begin(),a.end(),'a')来计数字符a在字符串a中的�
 
 algorithm中的find支持情况
 vector，deque支持，stack，queue，priority_queue都不支持
+
+35.multiset和set的唯一区别就是一个唯一一个不唯一
+
+36.最小值添加如果是唯一的用set，不唯一用priority_queue或mulitset，能用priority_queue
+就用，性能更好
+
+37.支持lower_bond的也支持upper_bond,返回第一个大于x的迭代器
+
+38.priority_queue的比较函数是反的，如果想变成小顶堆要写大于在前的比较函数
+
+39.priority_queue不支持直接用迭代器读取数据
