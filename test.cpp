@@ -9,4 +9,5 @@ int main(){
     x.emplace(1,1);
     x.emplace(2,2);
     auto &[a,b] = *x.find(2);
+    b+=1;
 }
