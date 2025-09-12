@@ -155,4 +155,12 @@ vector，deque支持，stack，queue，priority_queue都不支持
 
 38.priority_queue的比较函数是反的，如果想变成小顶堆要写大于在前的比较函数
 
-39.priority_queue不支持直接用迭代器读取数据
+39.随机访问迭代器(支持与数字加减)：vector，deque
+双向迭代器(支持自加自减)：map，set，multimap，multiset,unordered只支持自加，vector,deque
+不支持迭代器：queue，priority_queue,stack
+支持用迭代器解指针的容器：vector，map，set，deque，multimap,multiset,unordered,vector,deque
+是否可以通过迭代器更改:vector,deque可以用迭代器改值，map,multimap,set,multiset不能改键，set里全是
+键所以改不了
+
+40.注意自减在前和自减在后的区别，*(--a.end())是最后一个值，*(a.end()--)是容器最后一个值
+之后的值，这就是先减再用和先用再减的区别
