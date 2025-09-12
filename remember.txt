@@ -164,3 +164,8 @@ vector，deque支持，stack，queue，priority_queue都不支持
 
 40.注意自减在前和自减在后的区别，*(--a.end())是最后一个值，*(a.end()--)是容器最后一个值
 之后的值，这就是先减再用和先用再减的区别
+
+41.vector用lower_bond相当的快，find的速度是n，比较慢，所以能用lower_bond
+就用lower_bond
+
+42.场宽表示数据再最右边
