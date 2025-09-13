@@ -20,7 +20,7 @@ int main(){
       }
     }
     for(auto &i:all2){
-        cout << i << ' ';
+      cout << i << ' ';
     }
     cout << endl;
   }
