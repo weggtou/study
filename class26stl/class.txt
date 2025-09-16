@@ -175,3 +175,11 @@ cout << a[unknown]
 会输出0
 因为新建了一个键并赋值为int的默认构造
 如果此时cout << a.size()会比之前大一个，因为自动新建了
+
+(2)multimap由于一个键有多个值所以不能用键直接访问，如果要访问需要
+auto range = mm.equal_range(键)
+for(auto it = range.first;it != range.decond;++it){
+    cout << it->second << " ";
+}
+输出所有键的值
+equal_range会返回键开始的迭代器和结束的迭代器的后一个迭代器组成的pair
