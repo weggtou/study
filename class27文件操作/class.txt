@@ -1,0 +1,56 @@
+1.cin的意思是从终端读入，cout的意思是从终端中输出
+
+2.c语言读写文件
+FILE* fopen(const char* fileName,const char* mode)
+
+(1)c语言用fopen函数打开文件，返回一个文件类型的指针
+(2)第一个参数是内容为文件路径的字符串，其中反斜杠要打两次\\
+(3)第二个参数是文件的打开方式，r只读，w只全部删除重新写，a只添加
+r+可读覆盖写入，w+可读清空重写，a+可读，追加写
+细节看图片
+(3)因为文件会打开失败，所以在打开前要先判断是否为空
+FILE* file = fopen("test","a+");
+if(file == Null){
+  cout << "open file failed" << endl;
+  return 1;
+}
+(4)用fscanf(file,"%d",&a)
+来读取文件中的数据
+用fprintf(file,"%d\n",a)
+来写入数据
+
+(5)用char ch = fgetc(file);fputc(ch,file)
+用fgetc和fputc来读取和输出单个字符
+
+(6)char str[100];
+用fgets(str,100,file);和fput(str,file)读取输出整行字符串
+
+(7)上述函数，即f开头的输入输出函数，中的file改成stdin或者stdout就会变为
+默认的从终端输入输出
+
+(8)记得用完函数后用fclose(file)关闭，并将指针消除，file=NULL
+
+3.c++风格
+#include <fstream>
+fstream fio("test.txt",ios::in|ios::out|::app)
+(1)用fstream定义文件流
+(2)第一个参数也是文件路径
+(3)ios作用域下的in，out，app分别代表r，w，a
+(4)不同的操作类型可以同时存在，用或运算符连接即可，这样fio既可以当cin可以当cout
+fio >> a;
+fio << a;
+或者分开定义也可以
+ifstream fin("",ios::in)
+ofstream fout("",ios::app)
+
+(5)自动通过析构函数关闭文件，但是也可以手动关闭
+fio.close(),fin.close(),fout.close()
+
+4.c++中将字符串变为输入输出流的方法
+#include <sstream>
+string str = "1 2"
+stringstream ss(str):
+ss >> a >> b;
+
+5.如果main函数的返回值非0，powershell会报红，默认出错了，这种可以自己定义，但是现代编译器在遇到
+编译错误时也会改变return，并且有可能在你写的return之前
