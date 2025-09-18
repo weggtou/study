@@ -133,7 +133,8 @@ string 可以用count(a.begin(),a.end(),'a')来计数字符a在字符串a中的�
 30.scanf 比cin快
 
 31.int& x = y;和int* x = &y;
-这里的两个&不同，左边是左值引用，相当于将y和x绑定在同一地址，而右边&的意思是取地址
+这里的两个&不同，左边是左值引用，相当于将y和x绑定在同一地址，是一辈子都绑定在一起，x就是y
+对x的更改就是对y的更改，而右边&的意思是取地址，表示x是y的指针，但是x也可以更改为别的指针
 
 32.reserve和直接默认大小的区别是reserve内没有内容，vector的大小放多少是多少，而直接定大小是
 大小确定，提前塞入了默认值
@@ -173,3 +174,7 @@ vector，deque支持，stack，queue，priority_queue都不支持
 43.只有有序的vector可以使用lower_bond函数，set只能使用lower_bond方法
 
 44.cin,cout最好不要放在一个循环里，不断cincout交换会不断刷新缓冲区导致速度变慢，或者用scanf，和printf
+
+45.1ull整数字面量，代表unsigned long long 类型的1
+
+46.unsigned int 可以简写为unsigned
