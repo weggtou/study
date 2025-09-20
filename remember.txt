@@ -185,3 +185,5 @@ vector，deque支持，stack，queue，priority_queue都不支持
 48.在main函数内不能重载操作符
 
 49.int 10^9 long long 10^19
+
+50.当判断x==1y==2或y==1x==2类似这种情况时，可以直接写成x+y==3
