@@ -1,0 +1,48 @@
+模板将定义函数或类型是的类型或变量作为形参的方式
+
+1.template <typename T = int>
+用上面的模式定义模板，T相当于是类型的形参，在之后定义函数或者类时
+使用template就可以在后面跟<type>例如vector <int>来跟换类型
+
+2.模板参数也可以设置默认值
+
+3.模板除了可以传递类型，还可以传递不同类型的数据
+template <typename T,size_t n>
+这样n就相当于能用的一个变量了，在使用类型是写在尖括号里就能传入
+
+4.还可以传入仿函数，就是定义一个类，重载()操作符，通过模板传入，创建
+对象当函数使用
+struct doubleequal{
+  bool operator()(double a,double b){
+    return abs(a-b) < 1e-6;
+  }
+}
+template <typename e> 
+e equal;
+equal(a,b);
+这就是为什么priority_queue模板中要加一个可以创建元素的类型来作为比较
+函数了
+
+5.模板可以自推到类型，例如写了一个函数
+template <typename T>
+T test(T a){
+  return a;
+}
+在使用函数时不用再写<>直接在里面填变量就可以
+
+6.可变参数模板
+template <typename T,typename... Args>
+T sum(T first,Args... args){
+  return first+sum(args...);
+}
+大概这样使用
+可以看到在实现多数的和时，采用了递归，效率很低
+c++提供了折叠算法
+template <typename... Args>
+auto sum(Args... args){
+  return (args + ...);
+}
+如果点在右边最小的括号就在右边
+(1+(2+(3+4)))
+反之亦然
+(((1+2)+3)+4)
