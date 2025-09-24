@@ -1,0 +1,63 @@
+1.const
+(1)对于一般的类型如
+const int a = 1;
+该量只能拿来用，不能修改
+
+(2)对于指针
+如果加载类型前后 int const* a = &value; const int* a= &value;
+表示指针指向的值不能被修改
+*a = 10 错误；
+但指针本身可以指向新变量
+a = new int;
+对于已经加了const限定的变量，只能用该类指针来指向
+
+如果加在*后 int* const a= &value;
+表示指针不能修改，无法指向其他值，但是所指向的值可以被修改
+a = new int 错误；
+*a = 10 可以；
+
+两类可以一起使用 const int* const a=&value;
+
+(3)对于函数内部形参的const修饰，如果是不引用的形参，不会造成影响，因为即使传输的值const，在传递时会复制一份，不会改变原值
+即使函数是const，也不会改变外部已经创建变量的值，所以不影响
+如果是引用传参，遵循只能从宽到严的原则，即const变量只能传到const函数，非const变量能传递const函数，只要不改就行
+int test(const int &a){}
+这由什么作用呢，它使得形参不能改变但是可以避免拷贝加快速度，同时，在没有const时，引用是不能传临时值的，但是如果加了
+const，就可以传递临时值了，如test(10);
+
+(4)对于成员函数，如果在函数后加const就无法在函数中改变成员变量，如果是创建的该类的const变量，也只能调用有
+const修饰的成员函数
+
+2.mutable
+(1)只能修饰成员变量，表示在const的成员函数中可以被修改
+struct{
+  int a;
+  mutable int b;
+  void test const (){
+    b = 1;
+  }
+}
+a不能被修改，但是b可以
+
+(2)对于有引用的成员变量不会被const影响，可以在里面修改
+
+3.constexpr
+用constexpr修饰变量和const一样
+用constexpr修饰的函数会在编译期运行，不会影响函数的运行时间
+
+4.static
+(1)static作用于正常变量相当于申明在全局
+
+(2)static修饰成员变量相当于该变量属于该类的所有对象，创建任何一个该类的对象调用该成员变量都是一样的值
+
+(3)static修饰成员函数如果在public中可以直接调用该函数，不必创建对象，
+struct a{
+  static int a = 10;
+  int b;
+  static int func(){
+    a++;
+    b++;
+    return a+b;
+  }
+}
+a::func()可以直接调用函数，但是函数中只能使用static声明的成员变量，所以b++是错误的，也无法使用*this
