@@ -1,0 +1,80 @@
+在编译前对文件进行操作
+
+1.#include 
+<>在标准库中查找文件
+""先从同目录找找不到再从标准库找
+
+2.注释 在编译前全部删除
+
+3.#define 宏定义
+直接进行文本替换
+例如#define PI 3.1415926
+会直接将后文的PI替换成数字
+
+也可以定义函数
+#define sqrt(x) x*x
+sqrt(10)
+会将sqrt(10)替换为10*10
+但注意只是文本的替换如果
+sqrt(5+1)
+会变为5+1*5+1
+所以定义函数宏是要记得加括号
+sqrt(x) ((x)*(x))
+
+也可以将代码块定义为宏
+#define FI(i,s,n) for{int i=s;i<=n;i++}
+FI(i,1,9){
+  FI(j,1,i)
+    cout << 1<<endl;
+  cout << endl;
+}
+
+也可以通过#获得变量的名字的字符串
+#define OUT(n) cout << #n;
+int a =10;
+OUT(a);
+可以输出a
+
+如果宏定义需要换行可以在每行后加\，这样换行后的内容也包含在宏定义中
+
+也可以单独定义表示符
+#define RELEASE和条件预处理器结合使用
+
+4.条件预处理器
+#ifdef #ifndef #if #elif #else #endif defined
+
+#ifdef RELEASE
+  cout << "RELEASE" << endl;
+#else
+  cout << "debug" << endl;
+#endif
+
+上述语句的意思是如果没有定义RELEASE则else生效，如果定义则上面生效
+
+因为条件预处理器没有括号所以使用#endif做结尾表示结束
+
+#if #elif #else和没有#的类似，但是使用的变量只能是宏
+可以用宏进行逻辑运算，关系运算
+#define A 400
+#define B 500
+#if A>B
+  cout << "a";
+#else
+  cout << "b";
+
+define,及不带井号的difine可以用来判断一个宏是否被声明过
+define(A)
+返回true
+
+5.预处理
+有自动被定义的宏
+__cplusplus 代表编译器版本
+__FILE__ 代表当前文件名
+__LINE__ 代表当前行号
+__DATE__ 代表编译日期
+__TIME__ 代表编译时间
+
+6.单独定义表示符也可以在编译指令中定义
+c++ test.cpp -D
+在编译指令中加入-D之后加上想定义的表示符宏就行，这样在文件中该宏就是定义
+过的，如果需要带数值就跟上等号和具体的值
