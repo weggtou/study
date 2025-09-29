@@ -14,41 +14,39 @@ int main(){
   scanf("%d",&T);
   using add  = pair<int,int>;
   while (T--){
-    dout.sp();
     int k,m;
-    scanf("%d",&k);
-    scanf("%d",&m);
-    int a_1;
-    scanf("%d",&a_1);
-    int b;
-    scanf("%d",&b);
-    if(a_1+m<b){
-      cout << "Yoshino"<<endl;
-      continue;
+    scanf("%d%d",&k,&m);
+    queue <add> all1;
+    multiset <add> all2;
+    int g,x1=0,xn;
+    scanf("%d",&g);
+    for(int i=2;i<=pow(2,k);i++){
+      int x;
+      scanf("%d",&x);
+      if(x>g+m){
+        all1.emplace(x,i);
+      }else{
+        all2.emplace(x+m,i);
+      }
     }
-    debug(k);
-    debug(m);
-    priority_queue <add> all;
-
-    for(int i = 3;i<=pow(2,k-1)+1;i++){
-      int a,c;
-      scanf("%d",&a);
-      scanf("%d",&c);
-      all.emplace(max(a,c),0);
-      all.emplace(min(a,c)+m,1);
-      debug(all);
+    while(!all1.empty()){
+      add i = all1.front();
+      bool can2 = 0;
+      for(auto &g:all2){
+        if(g.first>=i.first){
+          int x = 32 - __builtin_clz(max(g.second,i.second));
+          int w = 1<<x;
+          if((w)/2<i.second&&(w)/2<g.second){
+            all1.pop();
+            break;
+          }
+        }
+      }
     }
-    
-    int x;
-    if(all.top().second == 1){
-      x = all.top().first-m;
+    if(all1.empty()){
+      printf("Kotori\n");
     }else{
-      x = all.top().first;
-    }
-    if(a_1+m>=x){
-      cout << "Kotori"<<endl;
-    }else{
-      cout << "Yoshino"<<endl;
+      printf("Yoshino\n");
     }
   }
 }

@@ -18,6 +18,7 @@ lower_bound(begin,end,v,fx)upper_bound(begin,end,v,fx)
 2.upper的作用是在一个有序的数组中找到第一个>v的迭代器
 3.如何算有序呢，例如从小到大排列
 4.复杂度是O(logn)
+5.如果没找到返回last迭代器
 
 next_permutation(begin,end)prev_permutation(begin,end)
 1.next是直接将数组改为下一个比数组现在大的排列，如果为最大排列，在下一次调用函数时会将函数改为最小的排列后返回false
