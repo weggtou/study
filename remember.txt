@@ -199,3 +199,6 @@ vector，deque支持，stack，queue，priority_queue都不支持
 int y,m,d;
 scanf("%d-%d-%d",&y,&m,&d);
 这样就能快速的将数字提取出来
+
+54.lambda函数使用其他相同lambda函数或结构体时要加&否则无法使用，因为lambda理论
+上定义在主函数外面
