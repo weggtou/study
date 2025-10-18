@@ -89,6 +89,9 @@ while(tock){
 将str2开始的字符串赋值到str1开始的字符串
 最后一个参数是大小
 
+8.strlwr(str)转换为小写
+strupr(str)转化为大写
+
 #include <stdlib.h>
 1.atoi(char)将字符串转为int
 "123" to 123
